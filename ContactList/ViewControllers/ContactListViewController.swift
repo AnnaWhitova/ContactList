@@ -8,16 +8,13 @@
 import UIKit
 
 final class ContactListViewController: UITableViewController {
-    private var contactList = Person.getContact()
+    var contactList: [Person]!
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else {return}
         let detailVC = segue.destination as? ContactDetailsViewController
         detailVC?.contact = contactList[indexPath.row]
-        
-        guard let tabBarController = segue.destination as? TabBarViewController else {return}
-        tabBarController.contactList = contactList
     }
     
 

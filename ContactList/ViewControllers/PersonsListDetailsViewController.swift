@@ -9,7 +9,7 @@ import UIKit
 
 class PersonsListDetailsViewController: UITableViewController {
     var contactList: [Person]!
-    
+  
     
     // MARK: - UITableViewDataSource
     
@@ -42,7 +42,13 @@ class PersonsListDetailsViewController: UITableViewController {
             content.image = UIImage(systemName: "tray")
         }
         
+        cell.contentConfiguration = content
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
     

@@ -8,8 +8,7 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    var contactList: [Person]!
-
+    private var contactList = Person.getContact()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,12 +16,15 @@ class TabBarViewController: UITabBarController {
     }
     
     private func transferData() {
-        tabBarController?.viewControllers?.forEach({ viewController in
-            if let navigationVC = viewController as? UINavigationController {
-                let persondListDetailVC = navigationVC.topViewController as? PersonsListDetailsViewController
-                persondListDetailVC?.contactList = contactList
+        guard let viewControllers else {return}
+        
+        viewControllers.forEach { viewController in
+            if let  contactListVC  = viewController as? ContactListViewController {
+                contactListVC.contactList = contactList
+            } else if let personsDetailsVC = viewController as? PersonsListDetailsViewController {
+                personsDetailsVC.contactList = contactList
             }
-        })
+        }
     }
 
 }
